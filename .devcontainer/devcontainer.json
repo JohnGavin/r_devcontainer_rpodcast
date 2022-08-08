@@ -5,7 +5,10 @@
 	"dockerComposeFile": "docker-compose.yml",
 	"workspaceFolder": "/workspace",
 	"service": "vscode",
-
+	
+	// mounts to map from local folder to inside the container
+		//mounts: {folder1:folder2},
+		
 	"features": {
 		"fish": "latest"
 	},
