@@ -6,7 +6,7 @@
 FROM rocker/r-ver:4.2.1
 
 # Options for setup script
-ARG USERNAME
+ARG USERNAME=rstudio
 ARG INSTALL_ZSH="false"
 ARG USER_UID="1000"
 ARG USER_GID="1000"
