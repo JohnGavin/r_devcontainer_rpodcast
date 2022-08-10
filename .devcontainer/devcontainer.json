@@ -7,7 +7,8 @@
 	"service": "vscode",
 	
 	// mounts to map from local folder to inside the container
-		//mounts: {folder1:folder2},
+	//"mounts": ["source=/opt/local/renv/cache,target=/renv/cache,type=bind,consistency=chched"],
+	
 		
 	"features": {
 		"fish": "latest"
@@ -66,14 +67,36 @@
 		"GitHub.vscode-pull-request-github",
 		"quarto.quarto"
 		//"hoovercj.vscode-power-mode"
-	]
+	],
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],
+		// Forward Jupyter and RStudio ports
+		"forwardPorts": [8787, 8888],
+		"portsAttributes": {
+			"8787": {
+				"label": "Rstudio",
+				"requireLocalPort": true,
+				"onAutoForward": "ignore"
+			},
+			"8888": {
+				"label": "Jupyter",
+				"requireLocalPort": true,
+				"onAutoForward": "ignore"
+			}
+		},
+	
 
-	// Use 'postCreateCommand' to run commands after the container is created.
-	// "postCreateCommand": "R --version",
 
-	// Uncomment to connect as a non-root user. See https://aka.ms/vscode-remote/containers/non-root.
+		// Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
+		"remoteUser": "vscode",
+		//"remoteUser": "rstudio",
+		//"remote": "rstudio" ,
 	// "remoteUser": "docker"
+	
+		// Use 'postCreateCommand' to run commands after the container is created.
+		"postCreateCommand": "R --version ; pip3 install -r requirements.txt ; sudo /usr/lib/rstudio-server start"
+		// "postCreateCommand": "sudo rstudio-server verify-installation"
+		// "postCreateCommand": "pip3 install -r requirements.txt"
+		// "postCreateCommand": "R --version",
 }
