@@ -88,7 +88,7 @@ RUN /rocker_scripts/install_quarto.sh
 RUN sudo addgroup --system vscode \
     && sudo adduser --system --ingroup vscode vscode
 RUN sudo echo "vscode:vscode" |  chpasswd 
-WORKDIR /home/vscode
+# WORKDIR /home/vscode
 #COPY index.R           .
 # Switch to app user
 RUN sudo chown vscode:vscode -R /home/vscode
