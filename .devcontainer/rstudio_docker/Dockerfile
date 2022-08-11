@@ -53,7 +53,9 @@ RUN sudo /rocker_scripts/install_rstudio.sh
 #COPY index.R           .
 # Switch to app user
 #RUN chown vscode:vscode -R /home/vscode
+RUN echo 'rstudio:rstudio' | chpasswd
 # USER vscode
+USER rstudio
 
 EXPOSE 8787
 
