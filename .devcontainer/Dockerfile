@@ -6,7 +6,7 @@
 FROM rocker/r-ver:4.2.1
 
 # Options for setup script
-ARG USERNAME 
+ARG USERNAME
 ARG INSTALL_ZSH="false"
 ARG USER_UID="1000"
 ARG USER_GID="1000"
@@ -79,5 +79,18 @@ RUN /rocker_scripts/install_quarto.sh
 #ADD https://github.com/leafac/obs-cli/releases/download/v2.2.3/obs-cli-linux /usr/local/bin/obs-cli-js
 #RUN chmod 755 /usr/local/bin/obs-cli-js
 
+
+# Service 'vscode' 
+# RUN sudo adduser ${USERNAME}
+# 2022-08-10 10:08:26.291Z: #17 0.908 adduser: The user `jbg' already exists.
+# Create a non-root user
+RUN sudo addgroup --system vscode \
+    && sudo adduser --system --ingroup vscode vscode
+RUN sudo echo "vscode:vscode" |  chpasswd 
+# WORKDIR /home/vscode
+#COPY index.R           .
+# Switch to app user
+RUN sudo chown vscode:vscode -R /home/vscode
+
 # [Optional] Set the default user. Omit if you want to keep the default as root.
-# USER $USERNAME
+USER $USERNAME
