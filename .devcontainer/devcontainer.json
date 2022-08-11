@@ -6,7 +6,7 @@
 	"workspaceFolder": "/workspace",
 	//"service": "vscode",
 	//"service": "rstudiodevcontainer" , 
-	"service": "vscode,rstudiodevcontainer" , 
+	"service": "rstudiodevcontainer" , 
 
 	// mounts to map from local folder to inside the container
 	//"mounts": ["source=/opt/local/renv/cache,target=/renv/cache,type=bind,consistency=chched"],
@@ -74,13 +74,26 @@
 	],
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
-	// "forwardPorts": [],
-
+	// Forward Jupyter and RStudio ports
+	"forwardPorts": [8787, 8888],
+	"portsAttributes": {
+		"8787": {
+			"label": "Rstudio",
+			"requireLocalPort": true,
+			"onAutoForward": "ignore"
+		},
+		"8888": {
+			"label": "Jupyter",
+			"requireLocalPort": true,
+			"onAutoForward": "ignore"
+		}
+	},
+	
 	// Use 'postCreateCommand' to run commands after the container is created.
 	// "postCreateCommand": "R --version"
 	// "postCreateCommand": "rstudio-server start"
 	// "postCreateCommand": "sudo /usr/sbin/rstudio-server start"
-	// "postCreateCommand": "sudo /usr/lib/rstudio-server/bin/rstudio-server start"
+	"postCreateCommand": "sudo /usr/lib/rstudio-server/bin/rstudio-server start"
 
 
 	// Uncomment to connect as a non-root user. See https://aka.ms/vscode-remote/containers/non-root.
