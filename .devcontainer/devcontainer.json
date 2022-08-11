@@ -2,11 +2,16 @@
 // https://github.com/microsoft/vscode-dev-containers/tree/v0.134.1/containers/r
 {
 	"name": "R",
+	// build v dockerComposeFile property
+	//  	The order of the files is important since later files override previous ones
+	// 		"dockerComposeFile": ["./docker-compose.yml", "./rstudio-docker/docker-compose.yml"],
 	"dockerComposeFile": "docker-compose.yml",
 	"workspaceFolder": "/workspace",
 	//"service": "vscode",
 	//"service": "rstudiodevcontainer" , 
 	"service": "rstudiodevcontainer" , 
+		// https://stackoverflow.com/questions/61013812/using-multiple-docker-files-in-vscode-remote
+
 
 	// mounts to map from local folder to inside the container
 	//"mounts": ["source=/opt/local/renv/cache,target=/renv/cache,type=bind,consistency=chched"],
@@ -93,7 +98,8 @@
 	// "postCreateCommand": "R --version"
 	// "postCreateCommand": "rstudio-server start"
 	// "postCreateCommand": "sudo /usr/sbin/rstudio-server start"
-	"postCreateCommand": "sudo /usr/lib/rstudio-server/bin/rstudio-server start"
+	// sudo requires a password so stalls on postCreateCommand command
+	"postCreateCommand": "/usr/lib/rstudio-server/bin/rstudio-server start"
 
 
 	// Uncomment to connect as a non-root user. See https://aka.ms/vscode-remote/containers/non-root.
