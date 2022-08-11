@@ -39,7 +39,6 @@ RUN sudo echo "RENV_PATHS_CACHE=/renv/cache" >> /usr/local/lib/R/etc/Renviron
 # [Optional] Uncomment this section to install additional R packages.
 RUN sudo install2.r --error --skipinstalled --ncpus -1 renv remotes
 
-EXPOSE 8787
 
 RUN sudo /rocker_scripts/install_pandoc.sh
 RUN sudo /rocker_scripts/install_quarto.sh
@@ -55,5 +54,7 @@ RUN sudo /rocker_scripts/install_rstudio.sh
 # Switch to app user
 #RUN chown vscode:vscode -R /home/vscode
 # USER vscode
+
+EXPOSE 8787
 
 CMD ["/init"]
