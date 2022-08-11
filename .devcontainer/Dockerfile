@@ -93,4 +93,4 @@ RUN sudo echo "vscode:vscode" |  chpasswd
 RUN sudo chown vscode:vscode -R /home/vscode
 
 # [Optional] Set the default user. Omit if you want to keep the default as root.
-USER $USERNAME
+# USER $USERNAME

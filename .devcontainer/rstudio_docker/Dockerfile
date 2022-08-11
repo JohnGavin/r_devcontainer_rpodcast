@@ -44,13 +44,13 @@ RUN /rocker_scripts/install_quarto.sh
 RUN /rocker_scripts/install_rstudio.sh
 
 # Create a non-root user
-RUN addgroup --system vscode \
-    && adduser --system --ingroup vscode vscode
-RUN echo "vscode:vscode" |  chpasswd 
-WORKDIR /home/vscode
+#RUN addgroup --system vscode \
+#    && adduser --system --ingroup vscode vscode
+#RUN echo "vscode:vscode" |  chpasswd 
+#WORKDIR /home/vscode
 #COPY index.R           .
 # Switch to app user
-RUN chown vscode:vscode -R /home/vscode
-USER vscode
+#RUN chown vscode:vscode -R /home/vscode
+# USER vscode
 
 CMD ["/init"]
