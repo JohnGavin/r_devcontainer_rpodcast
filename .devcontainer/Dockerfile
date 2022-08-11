@@ -6,7 +6,7 @@
 FROM rocker/r-ver:4.2.1
 
 # Options for setup script
-ARG USERNAME
+ARG USERNAME 
 ARG INSTALL_ZSH="false"
 ARG USER_UID="1000"
 ARG USER_GID="1000"
@@ -80,4 +80,4 @@ RUN /rocker_scripts/install_quarto.sh
 #RUN chmod 755 /usr/local/bin/obs-cli-js
 
 # [Optional] Set the default user. Omit if you want to keep the default as root.
-USER $USERNAME
+# USER $USERNAME
