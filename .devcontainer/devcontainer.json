@@ -42,6 +42,8 @@
 		},
 		"editor.bracketPairColorization.enabled": true,
 		"editor.guides.bracketPairs": "active"
+		//, "python.terminal.launchArgs": [ "-m", "IPython", "--no-autoindent" ]
+	
 	},
 
 	// Add the IDs of extensions you want installed when the container is created.
