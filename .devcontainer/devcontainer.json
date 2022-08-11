@@ -95,7 +95,7 @@
 	// "remoteUser": "docker"
 	
 		// Use 'postCreateCommand' to run commands after the container is created.
-		"postCreateCommand": "R --version ; sudo /usr/lib/rstudio-server start"
+		"postCreateCommand": "sudo /usr/lib/rstudio-server start"
 		// "postCreateCommand": "sudo rstudio-server verify-installation"
 		// "postCreateCommand": "pip3 install -r requirements.txt"
 		// "postCreateCommand": "R --version",
