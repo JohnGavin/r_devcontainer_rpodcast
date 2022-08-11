@@ -26,11 +26,11 @@ services:
         S6_VERSION: ${S6_VERSION}
         RSTUDIO_VERSION: ${RSTUDIO_VERSION}
         QUARTO_VERSION: ${QUARTO_VERSION}
-    volumes:
-      - ${VOLUME_PATH}:${VOLUME_PATH}
-      - /home/${USER}/.ssh:/home/${USER}/.ssh
-      - ${RENV_PATHS_CACHE_HOST}:${RENV_PATHS_CACHE_CONTAINER}
-      - ${VOLUME_PATH}/.devcontainer/rstudio_config_dir:/home/${USER}/.config/rstudio
+    #volumes:
+    #  - ${VOLUME_PATH}:${VOLUME_PATH}
+    #  - /home/${USER}/.ssh:/home/${USER}/.ssh
+    #  - ${RENV_PATHS_CACHE_HOST}:${RENV_PATHS_CACHE_CONTAINER}
+    #  - ${VOLUME_PATH}/.devcontainer/rstudio_config_dir:/home/${USER}/.config/rstudio
     restart:
       unless-stopped
     ports:

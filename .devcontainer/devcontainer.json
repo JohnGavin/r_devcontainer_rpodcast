@@ -77,7 +77,8 @@
 	// Use 'postCreateCommand' to run commands after the container is created.
 	// "postCreateCommand": "R --version"
 	// "postCreateCommand": "rstudio-server start"
-	"postCreateCommand": "sudo /usr/sbin/rstudio-server start"
+	// "postCreateCommand": "sudo /usr/sbin/rstudio-server start"
+	// "postCreateCommand": "sudo /usr/lib/rstudio-server/bin/rstudio-server start"
 
 
 	// Uncomment to connect as a non-root user. See https://aka.ms/vscode-remote/containers/non-root.
