@@ -84,8 +84,8 @@ RUN sudo /rocker_scripts/install_quarto.sh
 # RUN sudo adduser ${USERNAME}
 # 2022-08-10 10:08:26.291Z: #17 0.908 adduser: The user `jbg' already exists.
 # Create a non-root user
-RUN sudo addgroup --system vscode \
-    && sudo adduser --system --ingroup vscode vscode
+# RUN sudo addgroup --system vscode 
+# RUN sudo adduser --system --ingroup staff vscode
 RUN sudo echo "vscode:vscode" |  sudo chpasswd 
 # (echo user; echo password) | passwd
 # WORKDIR /home/vscode
