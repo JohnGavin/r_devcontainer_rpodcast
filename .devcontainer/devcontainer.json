@@ -4,8 +4,10 @@
 	"name": "R",
 	"dockerComposeFile": "docker-compose.yml",
 	"workspaceFolder": "/workspace",
-	"service": "vscode",
-	
+	//"service": "vscode",
+	//"service": "rstudiodevcontainer" , 
+	"service": "vscode,rstudiodevcontainer" , 
+
 	// mounts to map from local folder to inside the container
 	//"mounts": ["source=/opt/local/renv/cache,target=/renv/cache,type=bind,consistency=chched"],
 	
