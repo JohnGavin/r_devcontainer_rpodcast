@@ -6,7 +6,7 @@
 FROM rocker/r-ver:4.2.1
 
 # Options for setup script
-ARG USERNAME
+ARG USERNAME root
 ARG INSTALL_ZSH="false"
 ARG USER_UID="1000"
 ARG USER_GID="1000"
@@ -43,13 +43,13 @@ RUN apt-get update \
     && apt-get -y install --no-install-recommends dotnet-sdk-3.1
 
 # ensure that the renv package cache env var is accessible in default R installation
-RUN echo "RENV_PATHS_CACHE=/renv/cache" >> /usr/local/lib/R/etc/Renviron
+RUN sudo echo "RENV_PATHS_CACHE=/renv/cache" >> /usr/local/lib/R/etc/Renviron
 
 # copy the modified .Rprofile template to the renv cache
 #COPY library-scripts/.Rprofile-vscode /renv/.Rprofile-vscode
 
 # [Optional] Uncomment this section to add Quarto to the container
-RUN /rocker_scripts/install_quarto.sh
+RUN sudo /rocker_scripts/install_quarto.sh
 
 # [Optional] Uncomment this section to add Hugo to the container
 # Customize version number as appropriate
@@ -86,7 +86,7 @@ RUN /rocker_scripts/install_quarto.sh
 # Create a non-root user
 RUN sudo addgroup --system vscode \
     && sudo adduser --system --ingroup vscode vscode
-RUN sudo echo "vscode:vscode" |  chpasswd 
+RUN sudo echo "vscode:vscode" |  sudo chpasswd 
 # WORKDIR /home/vscode
 #COPY index.R           .
 # Switch to app user
@@ -94,3 +94,6 @@ RUN sudo chown vscode:vscode -R /home/vscode
 
 # [Optional] Set the default user. Omit if you want to keep the default as root.
 # USER $USERNAME
+
+# During debugging, this entry point will be overridden. For more information, please refer to https://aka.ms/vscode-docker-python-debug
+# CMD ["python", "sample_code_round_data_docker.py"] 
