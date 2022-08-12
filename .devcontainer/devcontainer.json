@@ -8,7 +8,6 @@
 	"dockerComposeFile": "docker-compose.yml",
 	"workspaceFolder": "/workspace",
 	//"service": "vscode",
-	//"service": "rstudiodevcontainer" , 
 	"service": "rstudiodevcontainer" , 
 		// https://stackoverflow.com/questions/61013812/using-multiple-docker-files-in-vscode-remote
 
@@ -100,11 +99,12 @@
 	// "postCreateCommand": "sudo /usr/sbin/rstudio-server start"
 	// sudo (for rstudio) requires a password (rstudio) else stalls on postCreateCommand command
 	"postCreateCommand": 'echo "rstudio" | sudo -S -k /usr/lib/rstudio-server/bin/rstudio-server start'
-	
+	// "postCreateCommand": "sudo rstudio-server start"
 
 
-	// Uncomment to connect as a non-root user. See https://aka.ms/vscode-remote/containers/non-root.
+	// Uncomment to connect as a non-root user. See https://aka.ms/vscode-remote/containers/non-root
 	// "remoteUser": "docker"
+	, "remoteUser": "rstudio"
 	// "remoteUser": "vscode"
 
 }

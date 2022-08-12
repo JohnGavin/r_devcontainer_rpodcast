@@ -52,9 +52,28 @@ RUN sudo /rocker_scripts/install_rstudio.sh
 #COPY index.R           .
 # RUN echo 'rstudio-server:rstudio-server' | chpasswd
 # (echo rstudio-server; echo rstudio-server) | passwd
-RUN echo 'rstudio:rstudio' | chpasswd
-RUN chown rstudio:rstudio -R /home/rstudio
 RUN usermod -aG sudo rstudio
+RUN echo 'rstudio:rstudio' | chpasswd
+RUN (echo rstudio; echo rstudio) | passwd
+RUN chown rstudio:rstudio -R /home/rstudio
+# --uid 1000 
+# adduser: The user `rstudio' already exists, but is not a system user. Exiting.
+# RUN adduser --system --ingroup rstudio rstudio
+# RUN adduser --ingroup system rstudio
+# RUN adduser --ingroup rstudio rstudio
+# RUN useradd -m -p rstudio rstudio
+# RUN useradd -p rstudio rstudio
+
+# Change the UID/GID of an existing container user#
+# https://code.visualstudio.com/remote/advancedcontainers/add-nonroot-user
+#ARG USERNAME=user-name-goes-here
+#ARG USER_UID=1000
+#ARG USER_GID=$USER_UID
+#RUN groupmod --gid $USER_GID $USERNAME \
+#    && usermod --uid $USER_UID --gid $USER_GID $USERNAME \
+#    && chown -R $USER_UID:$USER_GID /home/$USERNAME
+
+
 
 # USER vscode
 # USER rstudio
@@ -63,5 +82,7 @@ RUN usermod -aG sudo rstudio
 USER rstudio
 
 EXPOSE 8787
+# Expose Jupyter port
+EXPOSE 8888
 
 CMD ["/init"]

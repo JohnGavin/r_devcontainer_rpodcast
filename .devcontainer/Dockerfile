@@ -6,14 +6,25 @@
 FROM rocker/r-ver:4.2.1
 
 # Options for setup script
-ARG USERNAME root
+ARG USERNAME="root"
 ARG INSTALL_ZSH="false"
 ARG USER_UID="1000"
-ARG USER_GID="1000"
+ARG USER_GID=$USER_UID
 ARG UPGRADE_PACKAGES="false"
 ARG INSTALL_OHMYZSH="false"
 ARG INSTALL_NONFREE="false"
 ARG QUARTO_VERSION=latest
+
+# https://code.visualstudio.com/remote/advancedcontainers/add-nonroot-user
+# Create the user
+#RUN groupadd --gid $USER_GID $USERNAME \
+#    && useradd --uid $USER_UID --gid $USER_GID -m $USERNAME \
+    # [Optional] Add sudo support. Omit if you don't need to install software after connecting.
+#    && apt-get update \
+#    && apt-get install -y sudo \
+#    && echo $USERNAME ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/$USERNAME \
+#    && chmod 0440 /etc/sudoers.d/$USERNAME
+
 
 # key dependencies for certain R packages
 RUN apt-get update \
@@ -86,12 +97,16 @@ RUN sudo /rocker_scripts/install_quarto.sh
 # Create a non-root user
 # RUN sudo addgroup --system vscode 
 # RUN sudo adduser --system --ingroup staff vscode
-RUN sudo echo "vscode:vscode" |  sudo chpasswd 
+#RUN sudo echo "vscode:vscode" |  sudo chpasswd 
+RUN echo 'vscode:vscode' | chpasswd
+RUN (echo vscode; echo vscode) | passwd
+RUN usermod -aG sudo vscode
 # (echo user; echo password) | passwd
 # WORKDIR /home/vscode
 #COPY index.R           .
 # Switch to app user
 RUN sudo chown vscode:vscode -R /home/vscode
+
 
 # [Optional] Set the default user. Omit if you want to keep the default as root.
 # USER $USERNAME
