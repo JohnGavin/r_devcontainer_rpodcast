@@ -40,10 +40,6 @@ RUN sudo echo "RENV_PATHS_CACHE=/renv/cache" >> /usr/local/lib/R/etc/Renviron
 RUN sudo install2.r --error --skipinstalled --ncpus -1 renv remotes
 
 
-RUN sudo /rocker_scripts/install_pandoc.sh
-RUN sudo /rocker_scripts/install_quarto.sh
-RUN sudo /rocker_scripts/install_rstudio.sh
-
 # Create a non-root user
 # RUN addgroup --system rstudio
 # adduser: The user `rstudio-server' already exists with a different UID. Exiting.
@@ -75,14 +71,18 @@ RUN chown rstudio:rstudio -R /home/rstudio
 
 
 
+RUN sudo /rocker_scripts/install_pandoc.sh
+RUN sudo /rocker_scripts/install_quarto.sh
+RUN sudo /rocker_scripts/install_rstudio.sh
+
+EXPOSE 8787
+# Expose Jupyter port
+EXPOSE 8888
+
 # USER vscode
 # USER rstudio
 # Switch to rstudio-server user:
 # else ERROR Attempt to run server as user 'rstudio-server' (uid 999) from account 'rstudio' (uid 1000) without privilege, which is required to run as a different uid
 USER rstudio
-
-EXPOSE 8787
-# Expose Jupyter port
-EXPOSE 8888
 
 CMD ["/init"]
