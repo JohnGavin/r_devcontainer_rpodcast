@@ -78,7 +78,7 @@
 		//"Mohamed-El-Fodil-Ihaddaden.shinysnip",
 	],
 
-	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// Use 'forwardPorts' to make a list of ports inside the container(s) available locally.
 	// Forward Jupyter and RStudio ports
 	"forwardPorts": [8787, 8888],
 	"portsAttributes": {
