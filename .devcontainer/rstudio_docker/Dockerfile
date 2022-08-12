@@ -45,20 +45,22 @@ RUN sudo /rocker_scripts/install_quarto.sh
 RUN sudo /rocker_scripts/install_rstudio.sh
 
 # Create a non-root user
-RUN addgroup --system rstudio \
-    && adduser --system --ingroup rstudio rstudio-server
+# RUN addgroup --system rstudio
+# adduser: The user `rstudio-server' already exists with a different UID. Exiting.
+# RUN adduser --system --ingroup rstudio --uid 1000 rstudio-server
 #WORKDIR /home/vscode
 #COPY index.R           .
-RUN echo 'rstudio-server:rstudio-server' | chpasswd
+# RUN echo 'rstudio-server:rstudio-server' | chpasswd
 # (echo rstudio-server; echo rstudio-server) | passwd
 RUN echo 'rstudio:rstudio' | chpasswd
 RUN chown rstudio:rstudio -R /home/rstudio
+RUN usermod -aG sudo rstudio
 
 # USER vscode
 # USER rstudio
 # Switch to rstudio-server user:
 # else ERROR Attempt to run server as user 'rstudio-server' (uid 999) from account 'rstudio' (uid 1000) without privilege, which is required to run as a different uid
-USER rstudio-server
+USER rstudio
 
 EXPOSE 8787
 

@@ -98,8 +98,9 @@
 	// "postCreateCommand": "R --version"
 	// "postCreateCommand": "rstudio-server start"
 	// "postCreateCommand": "sudo /usr/sbin/rstudio-server start"
-	// sudo requires a password so stalls on postCreateCommand command
-	"postCreateCommand": "/usr/lib/rstudio-server/bin/rstudio-server start"
+	// sudo (for rstudio) requires a password (rstudio) else stalls on postCreateCommand command
+	"postCreateCommand": 'echo "rstudio" | sudo -S -k /usr/lib/rstudio-server/bin/rstudio-server start'
+	
 
 
 	// Uncomment to connect as a non-root user. See https://aka.ms/vscode-remote/containers/non-root.
