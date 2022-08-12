@@ -7,18 +7,15 @@
 	// 		"dockerComposeFile": ["./docker-compose.yml", "./rstudio-docker/docker-compose.yml"],
 	"dockerComposeFile": "docker-compose.yml",
 	"workspaceFolder": "/workspace",
-	//"service": "vscode",
-	"service": "rstudiodevcontainer" , 
+	"service": "vscode",
+	//"service": "rstudiodevcontainer" , 
 		// https://stackoverflow.com/questions/61013812/using-multiple-docker-files-in-vscode-remote
 
 
 	// mounts to map from local folder to inside the container
 	//"mounts": ["source=/opt/local/renv/cache,target=/renv/cache,type=bind,consistency=chched"],
 	
-		
-	"features": {
-		"fish": "latest"
-	},
+	"features": { "fish": "latest" },
 
 	// Set *default* container specific settings.json values on container create.
 	"settings": {
@@ -98,7 +95,7 @@
 	// "postCreateCommand": "rstudio-server start"
 	// "postCreateCommand": "sudo /usr/sbin/rstudio-server start"
 	// sudo (for rstudio) requires a password (rstudio) else stalls on postCreateCommand command
-	"postCreateCommand": 'echo "rstudio" | sudo -S -k /usr/lib/rstudio-server/bin/rstudio-server start'
+	"postCreateCommand": "echo 'rstudio' | sudo -S -k /usr/lib/rstudio-server/bin/rstudio-server start"
 	// "postCreateCommand": "sudo rstudio-server start"
 
 

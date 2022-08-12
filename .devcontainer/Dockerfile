@@ -41,9 +41,9 @@ RUN install2.r --error --skipinstalled --ncpus -4 languageserver renv remotes ht
 # install radian via python and pip3
 RUN apt-get update \
     && export DEBIAN_FRONTEND=noninteractive \
-    && apt-get -y install --no-install-recommends python3-setuptools
-
-RUN pip3 install radian
+    && apt-get -y install --no-install-recommends python3-setuptools \
+    && python3 -m pip --no-cache-dir install radian
+# RUN sudo pip3 install radian
 
 # install dot net core runtime for the R Tools plugin
 RUN wget https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb -O /tmp/packages-microsoft-prod.deb \

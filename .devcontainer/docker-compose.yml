@@ -35,8 +35,8 @@ services:
     env_file: .env
     # Add "forwardPorts": ["5432"] to **devcontainer.json** to forward PostgreSQL locally.
     # (Adding the "ports" property to this file will not forward from a Codespace.)
-    ports:
-      - ${LOCAL_PORT}:8787
+    #ports:
+    #  - ${LOCAL_PORT}:8787
 
     build:
       context: ./rstudio_docker
