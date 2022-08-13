@@ -41,9 +41,9 @@ RUN sudo install2.r --error --skipinstalled --ncpus -1 renv remotes
 
 
 # Create a non-root user
-# RUN addgroup --system rstudio
+RUN addgroup --system rstudio
 # adduser: The user `rstudio-server' already exists with a different UID. Exiting.
-# RUN adduser --system --ingroup rstudio --uid 1000 rstudio-server
+RUN adduser --system --ingroup rstudio --uid 1000 rstudio
 #WORKDIR /home/vscode
 #COPY index.R           .
 # RUN echo 'rstudio-server:rstudio-server' | chpasswd
@@ -75,9 +75,13 @@ RUN sudo /rocker_scripts/install_pandoc.sh
 RUN sudo /rocker_scripts/install_quarto.sh
 RUN sudo /rocker_scripts/install_rstudio.sh
 
+
 EXPOSE 8787
 # Expose Jupyter port
 EXPOSE 8888
+
+# RUN echo "\n\nif [ -d ~/.bashrc.d ]; then\n  for rc in ~/.bashrc.d/*rc; do\n    . \$rc\n  done\nfi\n" >> $HOME/.bashrc
+RUN echo 'postCreateCommand in workspace folder' && sudo /usr/lib/rstudio-server/bin/rstudio-server start
 
 # USER vscode
 # USER rstudio

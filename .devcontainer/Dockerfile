@@ -90,6 +90,17 @@ RUN sudo /rocker_scripts/install_quarto.sh
 #ADD https://github.com/leafac/obs-cli/releases/download/v2.2.3/obs-cli-linux /usr/local/bin/obs-cli-js
 #RUN chmod 755 /usr/local/bin/obs-cli-js
 
+# Create a non-root user
+# adduser: The user `rstudio-server' already exists with a different UID. Exiting.
+RUN usermod -aG sudo vscode
+#RUN addgroup --system vscode
+#RUN usermod -aG system vscode
+# RUN adduser --ingroup vscode --uid 1000 vscode
+# RUN echo 'rstudio-server:rstudio-server' | chpasswd
+# (echo rstudio-server; echo rstudio-server) | passwd
+RUN echo 'vscode:vscode' | chpasswd
+RUN (echo vscode; echo vscode) | passwd
+RUN chown vscode:vscode -R /home/vscode
 
 # Service 'vscode' 
 # RUN sudo adduser ${USERNAME}
@@ -98,15 +109,10 @@ RUN sudo /rocker_scripts/install_quarto.sh
 # RUN sudo addgroup --system vscode 
 # RUN sudo adduser --system --ingroup staff vscode
 #RUN sudo echo "vscode:vscode" |  sudo chpasswd 
-RUN echo 'vscode:vscode' | chpasswd
-RUN (echo vscode; echo vscode) | passwd
-RUN usermod -aG sudo vscode
 # (echo user; echo password) | passwd
 # WORKDIR /home/vscode
 #COPY index.R           .
 # Switch to app user
-RUN sudo chown vscode:vscode -R /home/vscode
-
 
 # [Optional] Set the default user. Omit if you want to keep the default as root.
 # USER $USERNAME

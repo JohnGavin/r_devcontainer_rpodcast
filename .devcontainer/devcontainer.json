@@ -6,9 +6,11 @@
 	//  	The order of the files is important since later files override previous ones
 	// 		"dockerComposeFile": ["./docker-compose.yml", "./rstudio-docker/docker-compose.yml"],
 	"dockerComposeFile": "docker-compose.yml",
+	//"dockerComposeFile": ["../docker-compose.yml", "docker-compose.extend.yml"],
+
 	"workspaceFolder": "/workspace",
 	"service": "vscode",
-	//"service": "rstudiodevcontainer" , 
+	// "service": "rstudiodevcontainer" , 
 		// https://stackoverflow.com/questions/61013812/using-multiple-docker-files-in-vscode-remote
 
 
@@ -95,13 +97,20 @@
 	// "postCreateCommand": "rstudio-server start"
 	// "postCreateCommand": "sudo /usr/sbin/rstudio-server start"
 	// sudo (for rstudio) requires a password (rstudio) else stalls on postCreateCommand command
-	"postCreateCommand": "echo 'rstudio' | sudo -S -k /usr/lib/rstudio-server/bin/rstudio-server start"
+	// postCreateCommand runs in the workspace folder
+	// "postCreateCommand": "echo \"postCreateCommand in workspace folder\" && sudo /usr/lib/rstudio-server/bin/rstudio-server start"
+	//"postCreateCommand": "echo 'vscode' | sudo -S -k /usr/lib/rstudio-server/bin/rstudio-server start"
+//	"postCreateCommand": "echo 'rstudio' | sudo -S -k /usr/lib/rstudio-server/bin/rstudio-server start"
 	// "postCreateCommand": "sudo rstudio-server start"
-
+	//"postCreateCommand": "bash ./.devcontainer/postCreateCommand.sh",
+	//"remoteUser": "root",
+	
+  //, "shutdownAction": "stopCompose"
 
 	// Uncomment to connect as a non-root user. See https://aka.ms/vscode-remote/containers/non-root
+	// non-root user when using a bind mount or any files you create will be root
 	//, "remoteUser": "docker"
 	//, "remoteUser": "rstudio"
-	//, "remoteUser": "vscode"
+	// , "remoteUser": "vscode"
 
 }
